@@ -5,8 +5,13 @@ secondaryBackgroundColor = "#ffffff"
 textColor = "#0f172a"
 font = "sans serif"
 
-[server]
-maxUploadSize = 10
+
 
 [browser]
 gatherUsageStats = false
+[server]
+headless = true
+port = 8501
+
+[runner]
+fastReruns = false
