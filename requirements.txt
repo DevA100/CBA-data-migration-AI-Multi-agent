@@ -1,0 +1,11 @@
+﻿# Existing packages
+streamlit==1.57.0
+pandas==2.2.0
+psycopg2-binary==2.9.9
+plotly==6.7.0
+python-dotenv==1.0.0
+
+# AI Agent Frameworks
+crewai==0.28.0
+langchain==0.1.0
+langchain-google-genai==0.1.0
