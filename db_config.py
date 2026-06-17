@@ -14,7 +14,10 @@ load_dotenv()
 
 def _connect(host, port, dbname, user, password, label="database"):
     try:
-        return psycopg2.connect(
+        # Neon and other cloud PostgreSQL providers require SSL.
+        # sslmode=require is safe for both local and cloud connections.
+        ssl_required = host not in ("localhost", "127.0.0.1")
+        conn_kwargs = dict(
             host=host,
             port=int(port),
             dbname=dbname,
@@ -22,6 +25,10 @@ def _connect(host, port, dbname, user, password, label="database"):
             password=password,
             connect_timeout=10,
         )
+        if ssl_required:
+            conn_kwargs["sslmode"] = "require"
+
+        return psycopg2.connect(**conn_kwargs)
     except OperationalError as exc:
         raise OperationalError(
             f"Cannot connect to {label} ({host}:{port}/{dbname}): {exc}"
